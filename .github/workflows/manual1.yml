@@ -19,12 +19,14 @@ on:
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   comment:
-    name: Add checkout commands
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@master
-      - uses: harupy/comment-on-pr@master
+      - name: Add checkout commands
+        uses: peter-evans/create-or-update-comment@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          filename: template.md
+          body: |
+            comment line 1
+            comment line 2
+            comment line final
