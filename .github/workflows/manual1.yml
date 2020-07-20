@@ -26,6 +26,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
+          issue-number: 1
           body: |
             comment line 1
             comment line 2
