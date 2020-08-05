@@ -11,6 +11,10 @@ jobs:
         run: |
           content="$(cat ./issue_templates/test.md)"
           echo "$content"
+          content="${content//'%'/'%25'}"
+          content="${content//$'\n'/'%0A'}"
+          content="${content//$'\r'/'%0D'}"
+          echo "$content"
           echo "::set-output name=report::$content"
       - id: show_report
         run: |
