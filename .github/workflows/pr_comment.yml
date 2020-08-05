@@ -5,6 +5,8 @@ jobs:
   postMarkdown:
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout
+        uses: actions/checkout@v2
       - id: get_report
         run: |
           content=`cat ./issue_templates/test.md`
