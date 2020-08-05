@@ -9,7 +9,7 @@ jobs:
         uses: actions/checkout@v2
       - id: get_report
         run: |
-          content="cat ./issue_templates/test.md"
+          content="$(cat ./issue_templates/test.md`)"
           echo "$content"
           echo "::set-output name=report::$content"
       - id: show_report
