@@ -5,10 +5,13 @@ jobs:
   postMarkdown:
     runs-on: ubuntu-latest
     steps:
+      - id: get_report
+        run: |
+          content=`cat ./issue_templates/test.md`
+          echo "::set-output name=report::$content"
       - name: Create comment
         uses: peter-evans/create-or-update-comment@v1
         with:
           issue-number: ${{ github.event.number }}
           body: |
-            This is a multi-line test comment
-            - With GitHub **Markdown** :sparkles:
+            ${{ steps.get_report.outputs.report }}
