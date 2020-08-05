@@ -6,11 +6,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Create comment
-        env:
-          PR_NUMBER: ${{ github.event.number }}
         uses: peter-evans/create-or-update-comment@v1
         with:
-          issue-number: $PR_NUMBER
+          issue-number: ${{ github.event.number }}
           body: |
             This is a multi-line test comment
             - With GitHub **Markdown** :sparkles:
