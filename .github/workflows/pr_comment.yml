@@ -1,0 +1,25 @@
+name: Test Command
+on:
+  pull_request:
+jobs:
+  postMarkdown:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - id: get_report
+        run: |
+          content="$(cat ./issue_templates/test.md)"
+          content="${content//'%'/'%25'}"
+          content="${content//$'\n'/'%0A'}"
+          content="${content//$'\r'/'%0D'}"
+          echo "::set-output name=report::$content"
+      - id: show_report
+        run: |
+          echo "${{ steps.get_report.outputs.report }}"
+      - name: Create comment
+        uses: peter-evans/create-or-update-comment@v1
+        with:
+          issue-number: ${{ github.event.number }}
+          body: |
+            ${{ steps.get_report.outputs.report }}
